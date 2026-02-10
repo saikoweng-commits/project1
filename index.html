@@ -1,1 +1,485 @@
-<h1>Meine Website</h1>
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Willkommen</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">  
+
+
+<style>
+:root {
+    --scene-width: clamp(900px, 80vw, 1600px);  /* Master-Breite */
+}
+html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+}
+body {
+        background-image: url("red2.png");
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: cover;
+}
+
+.rahmen {
+        position: fixed;
+        top: 50%;
+        left: 51.1%;
+        transform: translate(-51%, -50%);
+        width: calc(var(--scene-width) * 1.13); 
+        height: calc(100vh * 1.00);           
+        pointer-events: none;
+        filter:
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.25));
+}
+.menu-link {           	
+        text-decoration: none;
+        color: #000;
+        display: inline-block;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        font-family: 'Great Vibes', cursive;           
+        filter:
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.45))
+			drop-shadow(5px 5px 5px rgba(0,0,0,0.55))
+}
+.menu-link:hover {
+        transform: scale(1.08);         
+        opacity: 0.85;                 
+}
+.menu-first-row .menu-link {
+        font-size: 35px;
+}
+
+.menu-second-row {
+        margin-top: 50px;
+}
+.menu-second-row  .menu-link {
+        font-size: 27px;
+}
+.menu-wrapper {
+        position: absolute;	
+        top: 450px;
+        left: 200px;
+			
+}
+.menu-first-row, .menu-second-row {
+        display: flex;
+        justify-content: center;			
+        gap: 30px;
+}
+.bonsai {
+        position: fixed;
+        right: 0;    
+        bottom: 0;     
+        height: 100vh;  
+        width: auto;     
+        z-index: -2;      
+        transform-origin: bottom center;
+        pointer-events: none;
+
+        filter: 
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.45))
+            drop-shadow(5px 5px 5px rgba(0,0,0,0.55));
+}
+.krone1 {
+        position: absolute;
+        bottom: -1px;
+        left: -70px;
+        width: 1090px;
+        height: auto;
+        z-index: -1;
+        transform-origin: bottom center;
+        animation: sway1 18s ease-in-out infinite;
+        animation-delay: 0s;
+        filter: 
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.45))
+            drop-shadow(5px 5px 5px rgba(0,0,0,0.55));
+}
+@keyframes sway1 {
+        0%   { transform: rotate(0.15deg) translate(0, 0); }
+        20%  { transform: rotate(-0.25deg) translate(-0.4px, 0.2px); }
+        40%  { transform: rotate(0.22deg) translate(0.5px, -0.2px); }
+        60%  { transform: rotate(-0.18deg) translate(-0.3px, 0.15px); }
+        80%  { transform: rotate(0.16deg) translate(0.3px, -0.15px); }
+        100% { transform: rotate(0.15deg) translate(0, 0); }
+}
+.krone3 {
+        position: absolute;
+        bottom: -1px;
+        left: -70px;
+        width: 1090px;
+        height: auto;
+        z-index: -1;
+        transform-origin: bottom center;
+        animation: sway3 17s ease-in-out infinite;
+        animation-delay: 1.5s;
+        filter: 
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.45))
+            drop-shadow(5px 5px 5px rgba(0,0,0,0.55));
+}
+@keyframes sway3 {
+        0%   { transform: rotate(-0.12deg) translate(0, 0); }
+        25%  { transform: rotate(0.18deg) translate(0.35px, -0.2px); }
+        50%  { transform: rotate(-0.15deg) translate(-0.4px, 0.2px); }
+        75%  { transform: rotate(0.12deg) translate(0.3px, -0.15px); }
+        100% { transform: rotate(-0.12deg) translate(0, 0); }
+}
+.krone4 {
+        position: absolute;
+        bottom: -1px;
+        left: -70px;
+        width: 1090px;
+        height: auto;
+        z-index: -1;
+        transform-origin: bottom center;
+        animation: sway4 19s ease-in-out infinite;
+        animation-delay: 0.8s;
+        filter: 
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.45))
+            drop-shadow(5px 5px 5px rgba(0,0,0,0.55));
+}
+@keyframes sway4 {
+        0%   { transform: rotate(0.14deg) translate(0, 0); }
+        20%  { transform: rotate(-0.2deg) translate(-0.35px, 0.15px); }
+        40%  { transform: rotate(0.18deg) translate(0.4px, -0.15px); }
+        60%  { transform: rotate(-0.14deg) translate(-0.3px, 0.12px); }
+        80%  { transform: rotate(0.13deg) translate(0.3px, -0.12px); }
+        100% { transform: rotate(0.14deg) translate(0, 0); }
+}
+.krone5 {
+        position: absolute;
+        bottom: -1px;
+        left: -70px;
+        width: 1090px;
+        height: auto;
+        z-index: -1;
+        transform-origin: bottom center;
+        animation: sway5 18s ease-in-out infinite;
+        animation-delay: 2.5s;
+        filter: 
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.45))
+            drop-shadow(5px 5px 5px rgba(0,0,0,0.55));
+}
+@keyframes sway5 {
+        0%   { transform: rotate(-0.14deg) translate(0, 0); }
+        25%  { transform: rotate(0.18deg) translate(0.35px, -0.18px); }
+        50%  { transform: rotate(-0.13deg) translate(-0.4px, 0.18px); }
+        75%  { transform: rotate(0.15deg) translate(0.3px, -0.15px); }
+        100% { transform: rotate(-0.14deg) translate(0, 0); }
+}
+.content {
+        position: relative;
+        z-index: 1;
+        padding: 120px; /* Abstand zum Rahmen */
+}
+.popup { 
+        display:none; 
+	    position:fixed; 
+	    top:0; left:0; 
+	    width:100%; 
+	    height:100%;
+        background: rgba(0,0,0,0.5); 
+	    z-index:1000; 
+	    justify-content:center; 
+	    align-items:center; 
+}
+.popup.show { display:flex; }
+
+.popup-content {
+        width: 300px;  /* größer als vorher */
+        height: 450px; 		
+        background: url('rahmenin.png') no-repeat;
+		background-size: 100% 100%;
+        padding:30px; 
+		border-radius:10px; 
+		text-align:center;
+        position: relative; 
+		font-family: 'Great Vibes', cursive; 
+		color:#000;
+        font-size: 22px;
+	    line-height: 0.9;
+}
+.popup.show .popup-content { transform: scale(1); }
+
+.close { 
+        position:absolute; 
+		top:10px; 
+		right:15px; 
+		font-size:24px; 
+		cursor:pointer; 
+		color:#000; 
+}
+
+.dish-btn { 
+        font-family: 'Great Vibes', cursive; 
+		margin:5px; 
+		padding:8px 15px; 
+		border:none; 
+		border-radius:5px;
+        cursor:pointer; 
+		background:transparent; 
+		transition: transform 0.2s ease; 
+}
+
+.dish-btn:hover { transform: scale(1.08); }
+
+.zip-input { margin:15px 0; }
+.zip-input input { 
+        padding:5px; 
+		width:120px; 
+		border-radius:5px; 
+		border:1px solid #000; 
+}
+.zip-input button { 
+        padding:5px 10px; 
+		margin-left:5px; 
+		border-radius:5px; 
+		border:none; 
+		background:transparent; 
+		color:#000; 
+		cursor:pointer; 
+		font-family: 'Great Vibes', cursive; 
+		font-size: 26px;
+}
+
+
+#submitOrder { 
+        margin-top:2px; 
+		padding:1px 15px; 
+		border-radius:5px; 
+		border:none; 
+		background:transparent; 
+		color:#000; 
+		cursor:pointer;
+        font-family: 'Great Vibes', cursive;
+        font-size: 26px; 		
+}
+.dish-number-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Abstand zwischen den Reihen */
+        margin: 15px 0;
+        font-family: 'Great Vibes', cursive; 
+}
+
+.dish-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+}
+
+.dish-row input.dish-number {
+        width: 60px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #000;
+        text-align: center;
+        font-family: 'Great Vibes', cursive; 
+}
+
+.dish-row button.plus,
+.dish-row button.minus {
+        font-size: 26px;
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background: transparent; /* neutraler Hintergrund */
+        cursor: pointer;
+        font-family: 'Great Vibes', cursive; 
+        transition: transform 0.2s ease;
+}
+
+.dish-row button.plus:hover,
+.dish-row button.minus:hover {
+        transform: scale(1.1);
+}
+
+.dish-row span.qty {
+        width: 25px;
+        text-align: center;
+}
+
+#footerText {
+        position: fixed;       /* bleibt immer sichtbar, auch beim Scrollen */
+        bottom: 0px;          /* Abstand vom unteren Rand, anpassen wie du willst */
+        left: 500px;            /* Abstand von links, anpassen */
+        color: #000;           /* schwarz */
+        font-family: 'Helvetica', cursive;
+        font-size: 15px;       /* Schriftgröße anpassen */
+        z-index: 100;          /* über anderen Elementen */
+}
+
+</style>
+</head>
+
+<body>
+<p id="footerText">Demo</p>
+<img src="asiaborder5.png" class="rahmen" alt="Rahmen">
+<img src="tree8.png" class="bonsai" alt="Bonsai">
+<img src="krone1.png" class="krone1" alt="Krone 1">
+<img src="krone2.png" class="krone2" alt="Krone 2">
+<img src="krone3.png" class="krone3" alt="Krone 3">
+<img src="krone4.png" class="krone4" alt="Krone 4">
+<div class="menu-wrapper">
+  <div class="menu menu-first-row">
+      <a href="speisekarte.html" class="menu-link great-vibes">Speisen</a>
+      <a href="#" class="menu-link great-vibes" id="lieferserviceLink">Lieferservice</a>				
+      <a href="special.html" class="menu-link great-vibes">Specials</a>
+      <a href="reservierung.html" class="menu-link great-vibes">Reservierung</a>		
+      <a href="galerie.html" class="menu-link great-vibes">Galerie</a>       
+  </div>
+  <div class="menu menu-second-row">          
+      <a href="uns.html" class="menu-link great-vibes">Über Uns</a>
+      <a href="#" class="menu-link great-vibes" id="kontaktLink">Kontakt</a>
+      <a href="#" class="menu-link great-vibes" id="impressumLink">Impressum</a>
+  </div>
+</div>
+<!-- Pop-ups -->
+<div id="lieferservicePopup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <h2>Lieferservice</h2>
+    <p>Wähle dein Gericht aus der Speisekarte</p>
+   <div class="dish-number-list">
+  <div class="dish-row">
+    <input type="number" class="dish-number" placeholder="Nummer" min="0">
+    <button class="minus">-</button>
+    <span class="qty">0</span>
+    <button class="plus">+</button>
+  </div>
+  <!-- weitere Reihen, falls du mehrere gleichzeitig eingeben willst -->
+  <div class="dish-row">
+    <input type="number" class="dish-number" placeholder="Nummer" min="0">
+    <button class="minus">-</button>
+    <span class="qty">0</span>
+    <button class="plus">+</button>
+  </div>
+  <div class="dish-row">
+    <input type="number" class="dish-number" placeholder="Nummer" min="0">
+    <button class="minus">-</button>
+    <span class="qty">0</span>
+    <button class="plus">+</button>
+  </div>
+  <div class="dish-row">
+    <input type="number" class="dish-number" placeholder="Nummer" min="0">
+    <button class="minus">-</button>
+    <span class="qty">0</span>
+    <button class="plus">+</button>
+  </div>
+</div>
+    <div class="zip-input">
+      <input type="text" placeholder="PLZ eingeben" id="zipCode">
+      <button id="checkZip">Prüfen</button>
+    </div>
+    <p id="zipResult"></p>
+    <button id="submitOrder">Bestellung abschicken</button>
+    <p id="orderResult"></p>
+  </div>
+</div>
+<div id="kontaktPopup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <h2>Kontakt</h2>
+    <p>Email: info@demo-restaurant.de</p>
+    <p>Telefon: 01234 56789</p>
+    <p>Adresse: Musterstraße 1, 12345 Stadt</p>
+  </div>
+</div>
+<div id="impressumPopup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <h2>Impressum</h2>
+    <p>Demo-Restaurant GmbH</p>
+    <p>Geschäftsführer: Max Mustermann</p>
+    <p>Adresse: Musterstraße 1, 12345 Stadt</p>
+    <p>USt-ID: DE123456789</p>
+  </div>
+</div>
+<script>
+// Alle Pop-ups
+const popups = {
+  "Lieferservice": document.getElementById("lieferservicePopup"),
+  "Kontakt": document.getElementById("kontaktPopup"),
+  "Impressum": document.getElementById("impressumPopup")
+};
+
+// Alle Links
+const links = {
+  "Lieferservice": document.getElementById("lieferserviceLink"),
+  "Kontakt": document.getElementById("kontaktLink"),
+  "Impressum": document.getElementById("impressumLink")
+};
+
+// Öffnen per Klick
+Object.keys(links).forEach(key => {
+  links[key].onclick = e => {
+    e.preventDefault();
+    popups[key].classList.add("show");
+  }
+});
+
+// Close Buttons & Klick außerhalb
+Object.values(popups).forEach(popup => {
+  popup.querySelector(".close").onclick = () => popup.classList.remove("show");
+  window.addEventListener('click', e => { if(e.target === popup) popup.classList.remove("show"); });
+});
+
+// Fake PLZ-Prüfung Lieferservice
+document.getElementById("checkZip").onclick = () => {
+  const zip = document.getElementById("zipCode").value;
+  document.getElementById("zipResult").textContent = zip ? `Lieferung in PLZ ${zip} möglich ` : "Bitte PLZ eingeben.";
+}
+
+// Fake Bestellung abschicken
+document.getElementById("submitOrder").onclick = () => {
+  document.getElementById("orderResult").textContent = "Vielen Dank für deine Bestellung";
+}
+document.querySelectorAll('.dish-row').forEach(row => {
+  const input = row.querySelector('.dish-number');
+  const qtySpan = row.querySelector('.qty');
+  const plus = row.querySelector('.plus');
+  const minus = row.querySelector('.minus');
+
+  plus.onclick = () => {
+    let qty = parseInt(qtySpan.textContent);
+    qty++;
+    qtySpan.textContent = qty;
+  };
+
+  minus.onclick = () => {
+    let qty = parseInt(qtySpan.textContent);
+    if(qty > 0) qty--;
+    qtySpan.textContent = qty;
+  };
+});
+</script>
+
+</body>
+</html>
