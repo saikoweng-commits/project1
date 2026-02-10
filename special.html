@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Special</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --scene-width: clamp(900px, 80vw, 1600px);  /* Master-Breite */
+}
+
+html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+}
+
+
+body {
+        background-image: url("red2.png");
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: cover;
+}
+
+.rahmen {
+        position: fixed;
+        top: 50%;
+        left: 51.1%;
+        transform: translate(-51%, -50%); /* Mitte fix */
+        width: calc(var(--scene-width) * 1.13); /* leicht größer als Szene */
+        height: calc(100vh * 1.00);           /* minimal größer als Viewport */
+        pointer-events: none;
+        filter:
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.25));
+}
+#footerText {
+        position: fixed;       /* bleibt immer sichtbar, auch beim Scrollen */
+        bottom: 0px;          /* Abstand vom unteren Rand, anpassen wie du willst */
+        left: 500px;            /* Abstand von links, anpassen */
+        color: #000;           /* schwarz */
+        font-family: 'Helvetica', cursive;
+        font-size: 15px;       /* Schriftgröße anpassen */
+        z-index: 100;          /* über anderen Elementen */
+}
+
+
+#demo1 {
+        position: fixed;       /* immer sichtbar, auch beim Scrollen */
+        top: 150px;
+        left: 70px;
+        transform: none;
+        background: transparent; /* optional, damit Text lesbar ist */
+        padding: 10px 20px;
+        font-family: 'Great Vibes';
+        font-size: 26px;
+        text-align: center;
+        line-height: 1.4;     /* Abstand zwischen Zeilen */
+        max-width: 90%;        /* optional, damit es nicht über den Rand geht */
+        z-index: 100;          /* über anderen Elementen */
+        border-radius: 5px;    /* optional */
+	
+
+
+</style>
+</head>
+
+<body>
+
+
+<div id="demo1">
+   <strong>Unsere Specials</strong><br>
+
+Jede Woche überraschen wir Sie mit besonderen Kreationen aus unserer Küche<br>
+frisch, aromatisch und nur für kurze Zeit verfügbar.<br>
+Ob exotische Vorspeisen, neue Hauptgerichte oder verlockende Desserts:<br>
+Unsere Specials sind ein Fest für alle Sinne.<br>
+
+Entdecken Sie unser wöchentlich wechselndes Menü und<br>
+lassen Sie sich von einzigartigen Kombinationen und saisonalen Zutaten inspirieren.<br>
+Perfekt für alle, die gerne Neues probieren und den Geschmack Asiens in seiner ganzen Vielfalt erleben möchten.
+</div>
+<div class="background"></div>
+<img src="special3.png" class="rahmen" alt="Rahmen">
+</body>
+</html>

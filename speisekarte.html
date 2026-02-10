@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Speisekarte</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --scene-width: clamp(900px, 80vw, 1600px);  /* Master-Breite */
+}
+
+html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+}
+
+body {
+        background-image: url("red2.png");
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: cover;
+}
+
+.rahmen {
+        position: fixed;
+        top: 50%;
+        left: 51.1%;
+        transform: translate(-51%, -50%); /* Mitte fix */
+        width: calc(var(--scene-width) * 1.13); /* leicht größer als Szene */
+        height: calc(100vh * 1.00);           /* minimal größer als Viewport */
+        pointer-events: none;
+        filter:
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.25));
+}
+
+:root {
+    --book-width: clamp(100px, 40vw, 800px);
+}
+.book {
+        position: absolute;
+        width: var(--book-width);
+        height: 380px;     /* kleiner */
+        perspective: 2000px;
+	    top: -10px;
+	    left: 50%;
+	    transform: translateX(var(--book-x)) translateX(-50%);
+	    isolation: isolate;
+        margin: 200px auto 0; /* weiter nach unten */
+	    filter:
+            drop-shadow(1px 1px 1px rgba(0,0,0,0.15))
+            drop-shadow(2px 2px 2px rgba(0,0,0,0.25))
+            drop-shadow(3px 3px 3px rgba(0,0,0,0.35))
+            drop-shadow(4px 4px 4px rgba(0,0,0,0.45))
+            drop-shadow(5px 5px 5px rgba(0,0,0,0.55));
+}
+
+
+.page {
+        position: absolute;
+        width: var(--book-width);
+        height: 380px;
+        top: 0;
+        right: 0;
+        transform-origin: left;
+        transform-style: preserve-3d;
+        transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+		box-sizing: border-box;
+}
+
+.front, .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;  /* <<< statt center */
+        align-items: flex-start;      /* optional, falls linksbündig */
+        padding: 55px; 
+        box-sizing: border-box;
+        border: 1px solid #333;
+}
+
+.front {
+        background: #fffef0;
+        z-index: 2;
+        border-radius: 0 5px 5px 0;
+        box-shadow: inset 10px 0 30px -10px rgba(0,0,0,0.2);
+}
+
+.back {
+        background-image: url('rahmenin1.png') !important;
+     	background-size: cover;
+		background-position: center;
+        transform: rotateY(180deg);
+        z-index: 1;
+        border-radius: 5px 0 0 5px;
+}
+
+.cover-front {
+        background-image: url('goldrahmen2.png') !important;
+        background-size: cover;
+        background-position: center;
+        color: #ffd700 !important;   
+        box-shadow: 5px 5px 25px rgba(0,0,0,0.8) !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+input { display: none; }
+input:checked + .page { transform: rotateY(-180deg); z-index: 10; }
+
+.p1 { z-index: 9; }
+.p2 { z-index: 8; }
+.p3 { z-index: 7; }
+.p4 { z-index: 6; }
+.p5 { z-index: 5; }
+.p6 { z-index: 4; }
+.p7 { z-index: 3; }
+.p8 { z-index: 2; }
+.p9 { z-index: 1; }
+
+
+.menu-row {
+        font-family: 'Great Vibes';
+        display: flex;                
+        justify-content: space-between; /* Text links, Preis rechts */
+        width: 110%;                    /* Linie geht bis rechts */
+        padding: 0 20px 0 10px;       /* Oben + links/rechts Abstand */     	
+        align-items: flex-start;        /* Kinder oben ausrichten */
+        position: relative; 	/* für top bei Kindern */
+}
+
+
+
+/* Linker Text */
+.menu-row span:first-child {
+        position: relative;  /* damit top/left wirken */
+        top: -163px;           /* nach oben verschieben */
+        left: -25px;         /* nach links verschieben */
+}
+
+.menu-row1 {
+        font-family: 'Great Vibes';
+        display: flex;                
+        justify-content: space-between; /* Text links, Preis rechts */
+        width: 110%;                    /* Linie geht bis rechts */
+        padding: 0 20px 0 10px;       /* Oben + links/rechts Abstand */     	
+        align-items: flex-start;        /* Kinder oben ausrichten */
+        position: relative; 	/* für top bei Kindern */
+}
+.menu-row1 span:first-child {
+        position: relative;  /* damit top/left wirken */
+        top: 23px;           /* nach oben verschieben */
+        right: -265px;         /* nach links verschieben */
+		line-height: 23px;
+}
+
+
+img {
+width: 100%;       /* feste Breite oder % */
+        height: auto;       /* Höhe proportional */
+        position: absolute; /* jetzt kannst du es frei platzieren */
+        top: 50px;          /* Abstand von oben */
+        left: 0px;
+top:-15px;			/* Abstand von links */
+        z-index: 1;         /* falls es über/unter anderen Elementen liegen soll */
+}
+
+
+
+h3 {
+        font-family: 'Great Vibes';
+        position: relative;
+        top: -50px;   /* Abstand von oben */
+        left: 80px;  
+        margin-bottom: -5px;			
+        padding-bottom: 5px;                 /* Abstand unter der Linie, verkleinern = Linie höher */
+        padding-top: 5px;    
+        font-size: 1.5em;	
+}
+
+#footerText {
+        position: fixed;       /* bleibt immer sichtbar, auch beim Scrollen */
+        bottom: 0px;          /* Abstand vom unteren Rand, anpassen wie du willst */
+        left: 500px;            /* Abstand von links, anpassen */
+        color: #000;           /* schwarz */
+        font-family: 'Helvetica', cursive;
+        font-size: 15px;       /* Schriftgröße anpassen */
+        z-index: 100;          /* über anderen Elementen */
+}
+
+</style>
+</head>
+
+<body>
+<p id="footerText">Demo</p>
+
+
+<img src="asiaborder2.png" class="rahmen" alt="Rahmen">
+
+
+<div class="book">
+
+    <!-- BLATT 1 -->
+    <label>
+        <input type="checkbox">
+        <div class="page p1">
+            <div class="front cover-front">
+                
+            </div>
+            <div class="back">
+                <h3><u>Getränke · 饮料</u></h3>	
+				<div class="menu-row1"><span><u>2,90€</u></span></div>				
+                <div class="menu-row1"><span><u>2,90€</u></span></div>
+                <div class="menu-row1"><span><u>3,80€</u></span></div>
+		        <div class="menu-row1"><span><u>4,50€</u></span></div>
+		        <div class="menu-row1"><span><u>3,90€</u></span></div>
+				<div class="menu-row1"><span><u>4,20€</u></span></div>
+				<div class="menu-row1"><span><u>4,90€</u></span></div>
+				<div class="menu-row1"><span><u>2,50€</u></span></div>
+                <div class="menu-row"><span><u>1._Grüner_Tee· 绿茶________________</u></span></div>
+                <div class="menu-row"><span><u>2._Jasmintee · 茉莉花茶______________</u></span></div>
+                <div class="menu-row"><span><u>3._Hausgemachter_Eistee · 自制冰茶_______</u></span></div>
+		        <div class="menu-row"><span><u>4._Mango_Shake · 芒果奶昔__________</u></span></div>
+		        <div class="menu-row"><span><u>5._Lychee_Limonade · 荔枝汽水__________</u></span></div>
+				<div class="menu-row"><span><u>6._Thai_Eistee · 泰式冰茶____________</u></span></div>
+				<div class="menu-row"><span><u>7._Bubble_Tea · 珍珠奶茶____________</u></span></div>
+				<div class="menu-row"><span><u>8._Mineralwasser · 矿泉水____________</u></span></div>								
+            </div>
+        </div>
+    </label>
+
+    <!-- BLATT 2 -->
+    <label>
+        <input type="checkbox">
+        <div class="page p2">
+            <div class="front">
+                <img src="food1.png" class="meal2" alt="Meal 2">              
+            </div>
+            <div class="back">
+                <h3><u>Vorspeisen · 前菜</u></h3>
+				<div class="menu-row1"><span><u>4,50€</u></span></div>
+                <div class="menu-row1"><span><u>5,20€</u></span></div>
+                <div class="menu-row1"><span><u>6,40€</u></span></div>
+		        <div class="menu-row1"><span><u>6,90€</u></span></div>
+		        <div class="menu-row1"><span><u>7,50€</u></span></div>
+				<div class="menu-row1"><span><u>4,90€</u></span></div>
+				<div class="menu-row1"><span><u>6,20€</u></span></div>
+				<div class="menu-row1"><span><u>6,80€</u></span></div>
+                <div class="menu-row"><span><u>9._Gedämpfte_Edamame · 毛豆____________</u></span></div>
+                <div class="menu-row"><span><u>10._Knusprige_Frühlingsrollen · 春卷________</u></span></div>
+                <div class="menu-row"><span><u>11._Japanische_Teigtaschen · 饺子__________</u></span></div>
+		        <div class="menu-row"><span><u>12._Hähnchen_Saté_Spieße · 鸡肉沙爹串____</u></span></div>
+		        <div class="menu-row"><span><u>13._Garnelen_im_Tempurateig · 天妇罗虾______</u></span></div>
+				<div class="menu-row"><span><u>14._Seealgen_Salat · 海带沙拉__________</u></span></div>
+				<div class="menu-row"><span><u>15._Scharfer_Papayasalat · 辣味木瓜沙拉_____</u></span></div>
+				<div class="menu-row"><span><u>16._Gedämpfte_Dim_Sum · 点心_________</u></span></div>
+            </div>
+        </div>
+    </label>
+
+    <!-- BLATT 3 -->
+    <label>
+        <input type="checkbox">
+        <div class="page p3">
+            <div class="front">
+               <img src="food2.png" class="meal2" alt="Meal 2"> 
+            </div>
+            <div class="back">
+                <h3><u>Suppen · 汤类</u></h3>
+				<div class="menu-row1"><span><u>4,20€</u></span></div>
+                <div class="menu-row1"><span><u>5,40€</u></span></div>
+                <div class="menu-row1"><span><u>6,90€</u></span></div>
+                <div class="menu-row1"><span><u>7,20€</u></span></div>
+		        <div class="menu-row1"><span><u>6,10€</u></span></div>
+		        <div class="menu-row1"><span><u>8,90€</u></span></div>
+				<div class="menu-row1"><span><u>5,80€</u></span></div>
+				<div class="menu-row1"><span><u>7,50€</u></span></div>	
+                <div class="menu-row"><span><u>17._Miso_Suppe · 味噌汤____________</u></span></div>
+                <div class="menu-row"><span><u>18._Scharf_saure_Suppe · 酸辣汤_________</u></span></div>
+                <div class="menu-row"><span><u>19._Kokos_Hühnersuppe · 冬阴功鸡汤_______</u></span></div>
+                <div class="menu-row"><span><u>20._Ramen_Brühe · 拉面汤___________</u></span></div>
+		        <div class="menu-row"><span><u>21._Wantan_Suppe · 馄饨汤____________</u></span></div>
+		        <div class="menu-row"><span><u>22._Pho_mit_Rind · 牛肉河粉__________</u></span></div>
+				<div class="menu-row"><span><u>23._Gemüsesuppe_asiatische_Art · 亚洲蔬菜汤____</u></span></div>
+				<div class="menu-row"><span><u>24._Scharfe_Nudelsuppe · 辣味拉面_________</u></span></div>				
+            </div>
+        </div>
+    </label>
+	<!-- BLATT 4 -->
+	 <label>
+        <input type="checkbox">
+        <div class="page p4">
+            <div class="front">
+               <img src="food3.png" class="meal2" alt="Meal 2"> 
+            </div>
+            <div class="back">
+                <h3><u>Hauptgerichte · 主菜</u></h3>
+				<div class="menu-row1"><span><u>11,90€</u></span></div>
+                <div class="menu-row1"><span><u>13,50€</u></span></div>
+                <div class="menu-row1"><span><u>12,90€</u></span></div>
+		        <div class="menu-row1"><span><u>12,40€</u></span></div>
+		        <div class="menu-row1"><span><u>15,90€</u></span></div>
+				<div class="menu-row1"><span><u>14,80€</u></span></div>
+				<div class="menu-row1"><span><u>11,20€</u></span></div>
+				<div class="menu-row1"><span><u>10,90€</u></span></div>
+                <div class="menu-row"><span><u>25._Hähnchen_süß_sauer · 糖醋鸡_________</u></span></div>
+                <div class="menu-row"><span><u>26._Rindfleisch-Brokkoli · 西兰花牛肉_______</u></span></div>
+                <div class="menu-row"><span><u>27._Teriyaki_Hähnchen · 照烧鸡__________</u></span></div>
+		        <div class="menu-row"><span><u>28._Rotes_Thai_Curry · 泰式红咖喱_______</u></span></div>
+		        <div class="menu-row"><span><u>29._Knusprige_Ente · 脆皮鸭___________</u></span></div>
+				<div class="menu-row"><span><u>30._Lachs_mit_Sesamsoße · 芝麻酱三文鱼____</u></span></div>
+				<div class="menu-row"><span><u>31._Mapo_Tofu_🌶️ · 麻婆豆腐________</u></span></div>
+				<div class="menu-row"><span><u>32._Wokgemüse_mit_Sojasauce · 酱油炒蔬菜___</u></span></div>
+            </div>
+        </div>
+    </label>
+	<!-- BLATT 5 -->
+	 <label>
+        <input type="checkbox">
+        <div class="page p5">
+            <div class="front">
+               <img src="food4.png" class="meal2" alt="Meal 2"> 
+            </div>
+            <div class="back">
+                <h3><u>Nudelgerichte · 面食</u></h3>
+				<div class="menu-row1"><span><u>11,90€</u></span></div>
+                <div class="menu-row1"><span><u>10,80€</u></span></div>
+                <div class="menu-row1"><span><u>11,50€</u></span></div>
+		        <div class="menu-row1"><span><u>13,90€</u></span></div>
+		        <div class="menu-row1"><span><u>12,20€</u></span></div>
+				<div class="menu-row1"><span><u>11,30€</u></span></div>
+				<div class="menu-row1"><span><u>12,90€</u></span></div>
+				<div class="menu-row1"><span><u>11,80€</u></span></div>
+                <div class="menu-row"><span><u>33._Pad_Thai · 泰式炒河粉___________</u></span></div>
+                <div class="menu-row"><span><u>34._Gebratene_Eiernudeln · 炒蛋面_________</u></span></div>
+                <div class="menu-row"><span><u>35._Udon_Nudeln_mit_Gemüse · 蔬菜乌冬面___</u></span></div>
+		        <div class="menu-row"><span><u>36._Ramen_mit_Schweinebauch · 豚骨拉面_____</u></span></div>
+		        <div class="menu-row"><span><u>37._Kalte_Soba_ Nudeln · 冷荞麦面______</u></span></div>
+				<div class="menu-row"><span><u>38._Glasnudel_Wok · 炒粉丝___________</u></span></div>
+				<div class="menu-row"><span><u>39._Dan_Dan_Nudeln_🌶️ · 担担面_____</u></span></div>
+				<div class="menu-row"><span><u>40._Pho_mit_Huhn · 鸡肉河粉________</u></span></div>
+            </div>
+        </div>
+    </label>
+
+	<!-- BLATT 6 -->
+	 <label>
+        <input type="checkbox">
+        <div class="page p6">
+            <div class="front">
+               <img src="food5.png" class="meal2" alt="Meal 2"> 
+            </div>
+            <div class="back">
+                <h3><u>Sushi · 寿司</u></h3>
+				<div class="menu-row1"><span><u>4,80€</u></span></div>
+                <div class="menu-row1"><span><u>5,90€</u></span></div>
+                <div class="menu-row1"><span><u>4,60€</u></span></div>
+		        <div class="menu-row1"><span><u>8,90€</u></span></div>
+		        <div class="menu-row1"><span><u>9,50€</u></span></div>
+				<div class="menu-row1"><span><u>9,80€</u></span></div>
+				<div class="menu-row1"><span><u>6,90€</u></span></div>
+				<div class="menu-row1"><span><u>15,90€</u></span></div>
+                <div class="menu-row"><span><u>41._Avocado_Maki · 牛油果卷__________</u></span></div>
+                <div class="menu-row"><span><u>42._Lachs_Maki · 三文鱼卷___________</u></span></div>
+                <div class="menu-row"><span><u>43._Gurken_Maki · 黄瓜卷_____________</u></span></div>
+		        <div class="menu-row"><span><u>44._California_Roll · 加州卷____________</u></span></div>
+		        <div class="menu-row"><span><u>45._Tempura_Roll · 天妇罗卷___________</u></span></div>
+				<div class="menu-row"><span><u>46._Spicy_Tuna_Roll_🌶️ · 香辣金枪鱼卷___</u></span></div>
+				<div class="menu-row"><span><u>47._Nigiri_Lachs · 三文鱼握寿司_________</u></span></div>
+				<div class="menu-row"><span><u>48._Sushi_Mix_Platte · 寿司拼盘________</u></span></div>
+            </div>
+        </div>
+    </label>
+	
+		<!-- BLATT 7 -->
+	 <label>
+        <input type="checkbox">
+        <div class="page p7">
+            <div class="front">
+               <img src="food6.png" class="meal2" alt="Meal 3"> 
+            </div>
+            <div class="back">
+                <h3><u>Vegan · 素食</u></h3>
+				<div class="menu-row1"><span><u>10,20€</u></span></div>
+                <div class="menu-row1"><span><u>11,40€</u></span></div>
+                <div class="menu-row1"><span><u>11,90€</u></span></div>
+		        <div class="menu-row1"><span><u>10,80€</u></span></div>
+		        <div class="menu-row1"><span><u>11,20€</u></span></div>
+				<div class="menu-row1"><span><u>10,50€</u></span></div>
+				<div class="menu-row1"><span><u>6,90€</u></span></div>
+				<div class="menu-row1"><span><u>7,20€</u></span></div>
+                <div class="menu-row"><span><u>49._Gebratener_Tofu · 炸豆腐___________</u></span></div>
+                <div class="menu-row"><span><u>50._Gemüse_Curry · 蔬菜咖喱__________</u></span></div>
+                <div class="menu-row"><span><u>51._Veganes_Pad_Thai · 纯素泰式炒河粉___</u></span></div>
+		        <div class="menu-row"><span><u>52._Aubergine_in_Knoblauchsauce · 蒜香茄子___</u></span></div>
+		        <div class="menu-row"><span><u>53._Tofu_Teriyaki · 照烧豆腐__________</u></span></div>
+				<div class="menu-row"><span><u>54._Gebratener_Reis_vegan · 纯素炒饭______</u></span></div>
+				<div class="menu-row"><span><u>55._Sesam_Spinat · 芝麻菠菜__________</u></span></div>
+				<div class="menu-row"><span><u>56._Gemüse_Dumplings · 素菜饺子________</u></span></div>
+            </div>
+        </div>
+    </label>
+	
+	<!-- BLATT 8 -->
+	 <label>
+        <input type="checkbox">
+        <div class="page p8">
+            <div class="front">
+               <img src="food7.png" class="meal2" alt="Meal 2"> 
+            </div>
+            <div class="back">
+                <h3><u>Desserts · 甜点</u></h3>
+				<div class="menu-row1"><span><u>4,90€</u></span></div>
+                <div class="menu-row1"><span><u>4,80€</u></span></div>
+                <div class="menu-row1"><span><u>6,50€</u></span></div>
+                <div class="menu-row1"><span><u>4,60€</u></span></div>
+                <div class="menu-row1"><span><u>5,40€</u></span></div>
+                <div class="menu-row1"><span><u>4,80€</u></span></div>
+                <div class="menu-row1"><span><u>5,90€</u></span></div>
+                <div class="menu-row1"><span><u>2,50€</u></span></div> 
+                <div class="menu-row"><span><u>57._Mochi_Eis · 麻薯冰淇淋__________</u></span></div>
+                <div class="menu-row"><span><u>58._Gebackene_Banane · 炸香蕉__________</u></span></div>
+                <div class="menu-row"><span><u>59._Mango_Sticky_Rice · 芒果糯米饭_____</u></span></div>
+                <div class="menu-row"><span><u>60._Matcha_Eis · 抹茶冰淇淋_________</u></span></div>
+                <div class="menu-row"><span><u>61._Lyche_Kompott · 荔枝甜品__________</u></span></div>
+                <div class="menu-row"><span><u>62._Sesambällchen · 芝麻球____________</u></span></div>
+                <div class="menu-row"><span><u>63._Roter_Bohnen_Kuchen · 红豆糕_______</u></span></div>
+                <div class="menu-row"><span><u>64._Fortune_Cookie · 幸运饼干__________</u></span></div>               
+            </div>
+        </div>
+    </label>
+	
+    <!-- BLATT 9 -->
+    <label>
+        <input type="checkbox">
+        <div class="page p9">
+            <div class="front">
+                <img src="food8.png" class="meal2" alt="Meal 2"> 
+            </div>
+            <div class="back cover-front">                
+            </div>
+        </div>
+    </label>
+</body>
+</html>
